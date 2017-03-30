@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Cloud Based Video Event Detection</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/main.css" rel="stylesheet">
+    <script src="../static/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+      $(function() {
+    $('#train_btn').click(function() {
+ 
+        $.ajax({
+            url: '/train',
+            type: 'GET',
+            data: { 
+                ajaxid: 4
+              },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    $('#test_btn').click(function() {
+ 
+        $.ajax({
+            url: '/test',
+            type: 'GET',
+            data: { 
+                ajaxid: 4
+              },
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+      
+    </script>
+ 
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Bitbucket</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1 class="text-muted">Cloud Based Video Event Detection</h1>
+        </div>
+ 
+        <div class="jumbotron gray_box">
+            <h2>Activities</h2>
+            <p class="lead"></p>
+            <p><a class="btn btn-lg btn-success pull-left" href="train" id="train_btn" role="button">Video Train</a>
+            </p>
+            <p><a class="btn btn-lg btn-success pull-right" href="test" id="test_btn" role="button">Video Test</a>
+            </p>
+        </div>
+ 
+        <div class="row marketing">
+            <div class="col-lg-6">
+                h4>Bucket List</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+ 
+            <div class="col-lg-6">
+                <h4>Bucket List</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+ 
+        <footer class="footer">
+            <p>&copy; Company 2015</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>

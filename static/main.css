@@ -1,0 +1,33 @@
+.jumbotron.gray_box{
+  width: 100%;
+  float: left;
+}
+/*form.left_select{
+	float:right;
+}*/
+.select_area{
+  width: 100%;
+  float: left;
+}
+.select_area .v_select_train{
+	width:auto;
+	float:left;
+	padding:5px;
+	margin: 15px 0px;
+}
+.select_area .v_select{
+	width:auto;
+	float:right;
+	padding:5px;
+	margin:15px 0px;
+}
+p{
+    text-align: justify !important;
+}
+body{
+	background-image: url("images/back.jpg");
+	background-size: cover;
+}
+body .container{
+	background: #fff;
+}

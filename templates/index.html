@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Cloud Based Video Event Detection</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/main.css" rel="stylesheet">
+    <script src="../static/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+      $(function() {
+    $('#train_btn').click(function() {
+ 
+        $.ajax({
+            url: '/train',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+    $('#test_btn').click(function() {
+ 
+        $.ajax({
+            url: '/test',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+      
+    </script>
+ 
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">Bitbucket</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1 class="text-muted">Cloud Based Video Event Detection</h1>
+        </div>
+ 
+        <div class="jumbotron gray_box">
+            <h2>Activities</h2>
+            <form action="/test" method="POST" class="left_select">
+            <div class="select_area">
+                <select name="video_select_train" class="v_select_train">
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\train_video.mp4" selected="selected">train_video</option>
+                 <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gtrain.mp4" selected="selected">gate_train</option>
+                </select>
+                <select name="video_select" class="v_select">
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\single_person_destroying.mp4" selected="selected">single_person_destroying</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\single_person_long.mp4">single_person_long</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\two_people_entering.mp4">two_people_entering</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\fight.mp4">fight</option>
+
+                   <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\grepair1.mp4" selected="selected">Repairing gate 1</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\grepair2.mp4">Repairing gate 2</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gjump1.mp4">Gate jumping 1</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gjump2.mp4">Gate jumping 2</option>
+                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\glong.mp4">Gate long</option>
+                </select>
+            </div>
+                <p class="lead"></p>
+                <p><a class="btn btn-lg btn-success pull-left" href="train" id="train_btn" role="button">Video Train</a>
+                </p>
+                <p><a class="btn btn-lg btn-success pull-right" href="test" id="test_btn" role="button">Video Test</a>
+                </p>
+            </form>
+        </div>
+ 
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Abstract</h4>
+                <p>This is an implementation of a new supervised learning algorithm for detecting abnormal events in confined areas like ATM room, Server
+room, power control room etc. The proposed method has two phases, training phase and testing phase. In the training phase,
+Algorithm learns the motion path and speed of objects in a video. In the testing phase if any motion happens other than in the
+learned the motion path or the speed of object has large variation from the learned speed then the algorithm alert it as Abnormal
+event.The proposed method uses dense sampling and process video in a group of frames. The algorithm uses statistical functions
+maximum, minimum and mode to learn the motion path and speed of objects in a video.Comparing to many other existing
+algorithms this algorithm has less mathematical computation involved so the processing power needed to run this algorithm is very
+low compared to other algorithm.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+ 
+            <div class="col-lg-6">
+                <h4>Bucket List</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+ 
+        <footer class="footer">
+            <p>&copy; Company 2015</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>
