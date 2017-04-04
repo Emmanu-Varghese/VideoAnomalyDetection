@@ -155,7 +155,7 @@ def core_volume(args):
     return v_set
 
 def clear_folder():
-    dirPath = 'C:\\Users\\Emmanu\\PycharmProjects\\VideoEventDetection\\abnormal_frames'
+    dirPath = 'C:\\FlaskVideo\\static\\abnormal_frames'
     fileList = os.listdir(dirPath)
     for fileName in fileList:
      os.remove(dirPath+"/"+fileName)

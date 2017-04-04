@@ -1,8 +1,6 @@
 import cv2
-
 import time
 import itertools
-
 import ensem
 
 
@@ -11,10 +9,8 @@ def capture_run(path):
 
     #setting timeout to 30s
     # timeout=10
-
     #creating video capture object
     capture=cv2.VideoCapture(path)
-
     #Set the resolution of capturing to 640W*480H
     capture.set(3,640)
     capture.set(4,480)

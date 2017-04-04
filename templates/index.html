@@ -40,6 +40,20 @@
             }
         });
     });
+    $('#gal_btn').click(function() {
+ 
+        $.ajax({
+            url: '/gallery',
+            type: 'POST',
+            data: $('form').serialize(),
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
 });
       
     </script>
@@ -55,7 +69,9 @@
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation" class="active"><a href="#">Home</a>
                     </li>
-                    <li role="presentation"><a href="#">Bitbucket</a>
+                    <li role="presentation"><a href="https://github.com/Emmanu12/VideoAnomalyDetection">Github</a>
+                    </li>
+                    <li role="presentation"><a href="gallery" id="gal_btn">Abnormal Frames</a>
                     </li>
                 </ul>
             </nav>
@@ -65,26 +81,48 @@
         <div class="jumbotron gray_box">
             <h2>Activities</h2>
             <form action="/test" method="POST" class="left_select">
-            <div class="select_area">
-                <select name="video_select_train" class="v_select_train">
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\train_video.mp4" selected="selected">train_video</option>
-                 <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gtrain.mp4" selected="selected">gate_train</option>
-                </select>
-                <select name="video_select" class="v_select">
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\single_person_destroying.mp4" selected="selected">single_person_destroying</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\single_person_long.mp4">single_person_long</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\two_people_entering.mp4">two_people_entering</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\fight.mp4">fight</option>
 
-                   <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\grepair1.mp4" selected="selected">Repairing gate 1</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\grepair2.mp4">Repairing gate 2</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gjump1.mp4">Gate jumping 1</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\gjump2.mp4">Gate jumping 2</option>
-                  <option value="C:\Users\Emmanu\PycharmProjects\FlaskVideo\videos\glong.mp4">Gate long</option>
+            <div class="select_area">
+            <select name="thresh_select" class="thresh_select">
+                  <option selected disabled>Choose the threshold</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                </select>
+                <select name="video_select_train" class="v_select_train">
+                  <option selected disabled>Choose the training video</option>
+                  <option value="C:\FlaskVideo\videos\train_video.mp4">ATM train</option>
+                  <option value="C:\FlaskVideo\videos\gtrain.mp4">Gate train</option>
+                </select>
+
+                <select name="video_select" class="v_select">
+                 <option selected disabled>Choose the testing video</option>
+                  <option value="C:\FlaskVideo\videos\single_person_destroying.mp4">ATM machine destroying</option>
+                  <option value="C:\FlaskVideo\videos\single_person_long.mp4">ATM long delay</option>
+                  <option value="C:\FlaskVideo\videos\two_people_entering.mp4">ATM two people entering</option>
+                  <option value="C:\FlaskVideo\videos\fight.mp4">ATM fight</option>
+
+
+                  <option value="C:\FlaskVideo\videos\grepair2.mp4">Damaging Gate</option>
+                  <option value="C:\FlaskVideo\videos\gjump2.mp4">Gate jumping</option>
+                  <option value="C:\FlaskVideo\videos\glong.mp4">Gate Delay</option>
                 </select>
             </div>
                 <p class="lead"></p>
-                <p><a class="btn btn-lg btn-success pull-left" href="train" id="train_btn" role="button">Video Train</a>
+                <select name="dur_select" class="dur_select">
+                  <option selected disabled>Choose the duration</option>
+                  <option value="10">10</option>
+                  <option value="50">50</option>
+                  <option value="150">150</option>
+                  <option value="200">200</option>
+                  <option value="250">250</option>
+                  <option value="325">325</option>
+                </select>
+                <p><a class="btn btn-lg btn-success pull-left train_button" href="train" id="train_btn" role="button">Video Train</a>
                 </p>
                 <p><a class="btn btn-lg btn-success pull-right" href="test" id="test_btn" role="button">Video Test</a>
                 </p>
@@ -103,27 +141,22 @@ maximum, minimum and mode to learn the motion path and speed of objects in a vid
 algorithms this algorithm has less mathematical computation involved so the processing power needed to run this algorithm is very
 low compared to other algorithm.</p>
  
-                <h4>Bucket List</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
- 
-                <h4>Bucket List</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
             </div>
  
             <div class="col-lg-6">
-                <h4>Bucket List</h4>
-                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
- 
-                <h4>Bucket List</h4>
-                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
- 
-                <h4>Bucket List</h4>
-                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                <h4>Threshold</h4>
+                <p>This value Determines the Sensitivity of the App,More the value more the Sensitivity</p>
+
+                <h4>Duration</h4>
+                <p>Duration of the trainig video or event as number of packets,A packet is a group of frames</p>
+
+                <h4>Abnormal Frames</h4>
+                <p>Abnormal Frames captured during last testing session is displayed in an HTML page</p>
             </div>
         </div>
  
         <footer class="footer">
-            <p>&copy; Company 2015</p>
+            <p>&copy; Emmanu</p>
         </footer>
  
     </div>

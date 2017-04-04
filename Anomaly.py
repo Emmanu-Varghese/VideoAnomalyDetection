@@ -1,37 +1,36 @@
 import cv2
-
 import time
-
 import ensem
-import pyttsx
-
 import datetime
 from twilio.rest import TwilioRestClient
 
 
 
-def anomaly_run(path):
+def anomaly_run(path,thresh_val,dur):
+    print "threshold value is"
+    print thresh_val
+
     # initialize the first frame in the video stream
     firstFrame = None
+    twi_count=0
+
     #########################
 
-    # to_no = "+918547073500"
-    
-
-    # msg="Abnormaly Detected"
-    # account='ACb1b0ea4fd0015b8603516337d996eb8d'
-    # token='5cc96c2264969a1497153f925774ad3a'
-    # client=TwilioRestClient(account,token)
+    to_no = "+918547073400"
+    msg="Abnormal Event Detected"
+    account='ACb1b0ea4fd0015b8603516337d996eb8d'
+    token='5cc96c2264969a1497153f925774ad3a'
+    client=TwilioRestClient(account,token)
     
     #########################
 
     count=0
+    wre=0
     v_count=0
     if count==0:
         ensem.clear_folder()
     #creating video capture object
     #capture=cv2.VideoCapture(0)
-    engine = pyttsx.init()
     #Set the resolution of capturing to 640W*480H
     #capture.set(3,640)
     #capture.set(4,480)
@@ -43,7 +42,10 @@ def anomaly_run(path):
     ensemble_final_set=[]
     pack_count=0
     pack_count_c = 0
-    pack_max_count=143
+    pj=int(dur)+1
+    pk=pj-1
+    pack_max_count=pk
+    print type(pk)
     mod_max_list=[[x] for x in range(0,48)]
     mod_min_list=[[x] for x in range(0,48)]
     f_c=0
@@ -73,12 +75,21 @@ def anomaly_run(path):
     with open('mod_min.txt', 'r') as f4:
         mod_lower = [line.rstrip('\n') for line in f4]
     mod_lower = map(float, mod_lower)
-
+    pkm=0
     while(True):
+        if pkm==1:
+            text_event="Abnormal Event,Attention Required"
+        else:
+            text_event="Normal"
         # grab the current frame and initialize the occupied/unoccupied
         # text
         (grabbed, frame) = cap.read()
         text = "Unoccupied"
+        
+        if twi_count > 15:
+            #client.messages.create(from_="+13473942587",to=to_no,body=msg)
+            print "message sent"
+            twi_count=0
 
         # if the frame could not be grabbed, then we have reached the end
         # of the video
@@ -124,6 +135,7 @@ def anomaly_run(path):
             if pack_count_c > pack_max_count:
                     text="Person is not leaving:-Anomaly"
                     v_count=0
+                    twi_count=twi_count+1
                     
             else:
                     text = "Busy"
@@ -132,6 +144,8 @@ def anomaly_run(path):
         # draw the text and timestamp on the frame
         cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+        cv2.putText(frame, "Event Status: {}".format(text_event), (10, 50),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,0,0), 2)
         cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"),
                     (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
 
@@ -232,18 +246,15 @@ def anomaly_run(path):
                     v_flag=0
             print "violated flag cout is "
             print flag
-            if flag > 5:
-                if flag >15:
-                    print "Abnormaly by the presence of two persons"
-                if flag < 15:
-                    print "Abnormaly by Single person"
-                name = "abnormal_frames\\frame%d.jpg"%count
+            if flag > int(thresh_val):
+                name = "static\\abnormal_frames\\frame%d.jpg"%wre
                 cv2.imwrite(name, frame)
-                print flag
-                print "Abnormaly"
-                engine.say("Abnormaly")
-                #client.messages.create(from_="+13473942587",to=to_no,body=msg)
-                engine.runAndWait()
+                pkm=1
+                twi_count=twi_count+1
+                wre+=1
+            else:
+                pkm=0
+                
 
 
         if pack_count==pack_max_count:
@@ -268,8 +279,6 @@ def anomaly_run(path):
             print "flags violated "+ str(m_flag)
             if m_flag >6:
                 print "Abnormaly by mod"
-                engine.say("Abnormaly by mod")
-                engine.runAndWait()
             print temp_mod_max_list
             mod_max_list=[[x] for x in range(0,48)]
             mod_min_list=[[x] for x in range(0,48)]

@@ -21,10 +21,14 @@ def train_proc():
 @app.route("/test",methods=['POST','GET'])
 def anomaly_proc():
 	if request.method == 'POST':
-	    Anomaly.anomaly_run(request.form['video_select'])
+	    Anomaly.anomaly_run(request.form['video_select'],request.form['thresh_select'],request.form['dur_select'])
 	    print "Working"
 	    return render_template('index.html')
 	else:
 		return render_template('index.html')
+
+@app.route("/gallery",methods=['POST','GET'])
+def show_image():
+		return render_template('gallery.html')
 if __name__ == "__main__":
     app.run()

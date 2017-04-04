@@ -1,0 +1,40 @@
+
+ <html>
+<head><title>Dynamically load images: jQuery Looping</title>
+<style type="text/css">
+div  {
+
+display: inline;
+padding: 10px;
+
+}
+
+</style>
+
+</head>
+<title>Cloud Based Video Event Detection</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/main.css" rel="stylesheet">
+    <script src="../static/js/jquery-3.1.1.js"></script>
+<body class="drp">
+
+<div class="wrapper">
+<div><h2>Abnormal Frames</h2></div>
+<a href="/">Home</a>
+<div class="cont"></div>
+</div>
+
+<script type="text/javascript">
+$(document).ready( function() {
+var p=0
+	for(count = 0; count < 6; count++){
+       $('.cont').append("<img src='/static/abnormal_frames/frame"+(p+=1)+".jpg' />");	
+	}
+});
+</script>
+</body>
+</html>
